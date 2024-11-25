@@ -1,3 +1,14 @@
+:root {
+  font-size: 16px;
+  --alabasterColor: #f1ebe1;
+  --cadetBlueColor: #adb6c4;
+  --navyBlueColor: #1f2041;
+  --ghostWhiteColor: #f9f9f9;
+  --metallicGoldColor: #d4af37;
+  --whiteColor: #ffffff;
+  --grayColor: #7e7e7e;
+  --darkRedColor: #af0808;
+}
 @font-face {
   font-family: "Roboto";
   src: url(fonts/Roboto-Regular.ttf);
@@ -9,4 +20,73 @@
 @font-face {
   font-family: "LeagueSpartan";
   src: url(fonts/LeagueSpartan-Regular.ttf);
+}
+header {
+  background-color: var(--navyBlueColor);
+  padding: 37px 120px 0;
+}
+.logoAndNavBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: Roboto;
+  font-weight: 700;
+}
+.logo {
+  display: flex;
+}
+header .logo {
+  font-size: 36px;
+}
+.firstPartLogo {
+  color: var(--metallicGoldColor);
+}
+.secPartLogo {
+  color: var(--cadetBlueColor);
+}
+ul {
+  list-style: none;
+  color: var(--whiteColor);
+}
+p,
+ul {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  gap: 30px;
+}
+
+main {
+  height: 500px;
+  /*^^ do zmiany ^^ */
+  background-color: var(--ghostWhiteColor);
+}
+
+footer {
+  display: flex;
+  justify-content: space-between;
+  background-color: var(--navyBlueColor);
+  padding: 60px 120px;
+  height: 300px; /* do zmiany */
+  font-family: Roboto;
+  font-weight: 700;
+}
+
+footer p {
+  color: var(--whiteColor);
+}
+.footerNavBar {
+  align-self: flex-start;
+}
+.footerNavBar ul {
+  flex-direction: column;
+}
+.contactDataAndLogo {
+  display: flex;
+  flex-direction: column;
+  align-self: flex-end;
+  gap: 30px;
+}
+.contactDataAndLogo .logo {
+  font-size: 27px;
 }
