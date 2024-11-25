@@ -1,3 +1,5 @@
+import { home } from "./data.js";
+
 function headerGenerator() {
   const logoAndNavbar = document.querySelector(".logoAndNavBar");
   const logo = logoGenerator();
