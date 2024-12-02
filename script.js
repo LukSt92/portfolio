@@ -94,8 +94,11 @@ function skillGenerator(skill) {
   skillPointsContainer.className = "skillPointsContainer";
   skillExperience.className = "skillExperience";
   skillImg.src = `img/${skill.name.toLowerCase()}.png`;
+  skillImg.alt = `${skill.name} icon`;
   skillName.textContent = skill.name;
-  skillExperience.textContent = `${skill.yearsOfExperience} years`;
+  skillExperience.textContent = `${skill.yearsOfExperience} year${
+    skill.yearsOfExperience > 1 ? "s" : ""
+  }`;
   for (let i = 0; i < 5; i++) {
     const skillPointRadio = document.createElement("input");
 
@@ -106,7 +109,6 @@ function skillGenerator(skill) {
       yearValidation++;
     }
     skillPointsContainer.append(skillPointRadio);
-    // dodać sprawdzenie ilości lat i w zależności od wyniku zaznaczyć checkboxa.
   }
   skillSummary.append(skillName, skillPointsContainer, skillExperience);
   skillContainer.append(skillImg, skillSummary);

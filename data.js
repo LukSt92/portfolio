@@ -10,34 +10,34 @@ const home = [
         name: "HTML",
         yearsOfExperience: 3,
       },
-      //   {
-      //     name: "CSS",
-      //     yearsOfExperience: 1,
-      //   },
-      //   {
-      //     name: "JavaScript",
-      //     yearsOfExperience: 3,
-      //   },
-      //   {
-      //     name: "Git",
-      //     yearsOfExperience: 3,
-      //   },
-      //   {
-      //     name: "Figma",
-      //     yearsOfExperience: 1,
-      //   },
-      //   {
-      //     name: "Chrome",
-      //     yearsOfExperience: 2,
-      //   },
-      //   {
-      //     name: "VSCode",
-      //     yearsOfExperience: 5,
-      //   },
-      //   {
-      //     name: "GitHub",
-      //     yearsOfExperience: 4,
-      //   },
+      {
+        name: "CSS",
+        yearsOfExperience: 1,
+      },
+      {
+        name: "JavaScript",
+        yearsOfExperience: 3,
+      },
+      {
+        name: "Git",
+        yearsOfExperience: 3,
+      },
+      {
+        name: "Figma",
+        yearsOfExperience: 1,
+      },
+      {
+        name: "Chrome",
+        yearsOfExperience: 2,
+      },
+      {
+        name: "VSCode",
+        yearsOfExperience: 5,
+      },
+      {
+        name: "GitHub",
+        yearsOfExperience: 4,
+      },
     ],
   },
 ];
