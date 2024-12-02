@@ -1,4 +1,5 @@
 import { home } from "./data.js";
+const mainSection = document.querySelector("main");
 
 function headerGenerator() {
   const logoAndNavbar = document.querySelector(".logoAndNavBar");
@@ -54,5 +55,63 @@ function navBarGenerator() {
   return list;
 }
 
+function articleGenerator(data) {
+  const article = document.createElement("article");
+  const imgDiv = document.createElement("div");
+
+  imgDiv.className = "imgDiv";
+  article.append(imgDiv);
+  data.forEach((section) => {
+    const sectionTitle = document.createElement("div");
+    const sectionDesc = document.createElement("div");
+
+    sectionTitle.className = "sectionTitle";
+    sectionDesc.className = "sectionDesc";
+    sectionTitle.textContent = section.descName;
+    // Dodać warunek sprawdzający czy section.desc jest stringiem i czy jest tablicą array.isarray()
+    if (Array.isArray(section.desc)) {
+      section.desc.forEach((skill) => {
+        sectionDesc.append(skillGenerator(skill));
+      });
+    } else sectionDesc.textContent = section.desc;
+    article.append(sectionTitle, sectionDesc);
+  });
+  return article;
+}
+function skillGenerator(skill) {
+  const skillContainer = document.createElement("div");
+  const skillImg = document.createElement("img");
+  const skillSummary = document.createElement("div");
+  const skillName = document.createElement("p");
+  const skillPointsContainer = document.createElement("div");
+  const skillExperience = document.createElement("p");
+
+  skillContainer.className = "skillContainer";
+  skillImg.className = "skillImg";
+  skillSummary.className = "skillSummary";
+  skillName.className = "skillName";
+  skillPointsContainer.className = "skillPointsContainer";
+  skillExperience.className = "skillExperience";
+  skillImg.src = `img/${skill.name.toLowerCase()}.png`;
+  skillName.textContent = skill.name;
+  skillExperience.textContent = `${skill.yearsOfExperience} years`;
+  for (let i = 0; i < 5; i++) {
+    const skillPointCheckbox = document.createElement("input");
+
+    skillPointCheckbox.type = "checkbox";
+    skillPointsContainer.append(skillPointCheckbox);
+  }
+  skillSummary.append(skillName, skillPointsContainer, skillExperience);
+  skillContainer.append(skillImg, skillSummary);
+  return skillContainer;
+}
+
+function homeGenerator() {
+  const article = articleGenerator(home);
+
+  mainSection.append(article);
+}
+
 headerGenerator();
 footerGenerator();
+homeGenerator();
