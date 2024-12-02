@@ -55,26 +55,30 @@ function navBarGenerator() {
   return list;
 }
 
-function articleGenerator(data) {
+function articleGenerator(data, articleClassName) {
   const article = document.createElement("article");
   const imgDiv = document.createElement("div");
 
   imgDiv.className = "imgDiv";
+  article.className = articleClassName;
   article.append(imgDiv);
-  data.forEach((section) => {
-    const sectionTitle = document.createElement("div");
-    const sectionDesc = document.createElement("div");
+  data.forEach((subSection) => {
+    const subSectionCont = document.createElement("div");
+    const subSectionTitle = document.createElement("div");
+    const subSectionDesc = document.createElement("div");
 
-    sectionTitle.className = "sectionTitle";
-    sectionDesc.className = "sectionDesc";
-    sectionTitle.textContent = section.descName;
-    // Dodać warunek sprawdzający czy section.desc jest stringiem i czy jest tablicą array.isarray()
-    if (Array.isArray(section.desc)) {
-      section.desc.forEach((skill) => {
-        sectionDesc.append(skillGenerator(skill));
+    subSectionCont.className = "subSectionCont";
+    subSectionTitle.className = "subSectionTitle";
+    subSectionDesc.className = "subSectionDesc";
+    subSectionTitle.textContent = subSection.descName;
+    if (Array.isArray(subSection.desc)) {
+      subSection.desc.forEach((item) => {
+        subSectionDesc.className = "skillSection";
+        subSectionDesc.append(skillGenerator(item));
       });
-    } else sectionDesc.textContent = section.desc;
-    article.append(sectionTitle, sectionDesc);
+    } else subSectionDesc.textContent = subSection.desc;
+    subSectionCont.append(subSectionTitle, subSectionDesc);
+    article.append(subSectionCont);
   });
   return article;
 }
@@ -100,15 +104,14 @@ function skillGenerator(skill) {
     skill.yearsOfExperience > 1 ? "s" : ""
   }`;
   for (let i = 0; i < 5; i++) {
-    const skillPointRadio = document.createElement("input");
+    const skillPoint = document.createElement("div");
 
-    skillPointRadio.type = "radio";
-    skillPointRadio.disabled = true;
+    skillPoint.className = "skillPoint";
     if (skill.yearsOfExperience > yearValidation) {
-      skillPointRadio.checked = true;
+      skillPoint.className = "activeSkillPoint";
       yearValidation++;
     }
-    skillPointsContainer.append(skillPointRadio);
+    skillPointsContainer.append(skillPoint);
   }
   skillSummary.append(skillName, skillPointsContainer, skillExperience);
   skillContainer.append(skillImg, skillSummary);
@@ -116,7 +119,7 @@ function skillGenerator(skill) {
 }
 
 function homeGenerator() {
-  const article = articleGenerator(home);
+  const article = articleGenerator(home, "homeArticle");
 
   mainSection.append(article);
 }
