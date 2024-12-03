@@ -55,6 +55,10 @@ ul {
   padding: 0;
   gap: 30px;
 }
+a {
+  color: var(--whiteColor);
+  text-decoration: none;
+}
 
 main {
   background-color: var(--ghostWhiteColor);
@@ -88,11 +92,17 @@ footer p {
 .contactDataAndLogo .logo {
   font-size: 27px;
 }
-.homeArticle {
+article {
   max-width: 958px;
+  margin: 84px 0;
   display: flex;
   flex-direction: column;
+}
+.homeArticle {
   gap: 40px;
+}
+.aboutArticle {
+  gap: 65px;
 }
 .homeArticle > .imgDiv {
   margin-bottom: 25px;
@@ -118,6 +128,7 @@ footer p {
 .subSectionDesc {
   font-family: Roboto;
   color: var(--navyBlueColor);
+  white-space: pre-line;
 }
 .skillSection {
   display: flex;
@@ -171,4 +182,16 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+.allMessagesContainer {
+  margin: 65px 120px;
+  display: flex;
+  flex-direction: column;
+  gap: 65px;
+}
+.messageContainer {
+  display: flex;
+  flex-direction: column;
+  font-family: LeagueSpartan;
+  font-weight: 700;
 }

@@ -1,4 +1,4 @@
-import { homeSection } from "./data.js";
+import { homeSection, aboutSection, messagesSection } from "./data.js";
 const mainSection = document.querySelector("main");
 
 function headerGenerator() {
@@ -124,10 +124,35 @@ function homeGenerator() {
 
   mainSection.append(article);
 }
+function aboutSectionGenerator() {
+  const article = articleGenerator(aboutSection, "aboutArticle");
 
+  mainSection.append(article);
+}
+
+function messagesSectionGenerator() {
+  const allMessagesContainer = document.createElement("div");
+
+  allMessagesContainer.className = "allMessagesContainer";
+  messagesSection.forEach((message) => {
+    const messageContainer = document.createElement("div");
+    const senderName = document.createElement("span");
+    const senderEmail = document.createElement("span");
+    const senderMessage = document.createElement("span");
+
+    messageContainer.className = "messageContainer";
+    senderName.textContent = `Name: ${message.name}`;
+    senderEmail.textContent = `Email: ${message.email}`;
+    senderMessage.textContent = `Message: ${message.message}`;
+    messageContainer.append(senderName, senderEmail, senderMessage);
+    allMessagesContainer.append(messageContainer);
+    mainSection.append(allMessagesContainer);
+  });
+}
 headerGenerator();
 footerGenerator();
-homeGenerator();
+// homeGenerator();
+// aboutSectionGenerator();
+messagesSectionGenerator();
 
-// stworzyć funkcję aboutGenerator()
 // Ogarnąć nawigację
