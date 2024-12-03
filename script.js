@@ -48,12 +48,22 @@ function navBarGenerator() {
     const li = document.createElement("li");
     const section = document.createElement("a");
     section.className = name;
+    section.value = name;
     section.textContent = name.toUpperCase();
-    section.href = `#${name}`;
+    section.href = "#";
+    section.addEventListener("click", navigationSupport);
     li.append(section);
     list.append(li);
   });
   return list;
+}
+function navigationSupport(event) {
+  const chooser = event.target.value;
+
+  mainSection.textContent = "";
+  if (chooser === "home") homeSectionGenerator();
+  if (chooser === "about") aboutSectionGenerator();
+  if (chooser === "messages") messagesSectionGenerator();
 }
 
 function articleGenerator(data, articleClassName) {
@@ -119,7 +129,7 @@ function skillGenerator(skill) {
   return skillContainer;
 }
 
-function homeGenerator() {
+function homeSectionGenerator() {
   const article = articleGenerator(homeSection, "homeArticle");
 
   mainSection.append(article);
@@ -151,8 +161,8 @@ function messagesSectionGenerator() {
 }
 headerGenerator();
 footerGenerator();
-// homeGenerator();
+// homeSectionGenerator();
 // aboutSectionGenerator();
-messagesSectionGenerator();
+// messagesSectionGenerator();
 
 // Ogarnąć nawigację
