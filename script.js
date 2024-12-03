@@ -1,4 +1,4 @@
-import { home } from "./data.js";
+import { homeSection } from "./data.js";
 const mainSection = document.querySelector("main");
 
 function headerGenerator() {
@@ -49,6 +49,7 @@ function navBarGenerator() {
     const section = document.createElement("a");
     section.className = name;
     section.textContent = name.toUpperCase();
+    section.href = `#${name}`;
     li.append(section);
     list.append(li);
   });
@@ -119,7 +120,7 @@ function skillGenerator(skill) {
 }
 
 function homeGenerator() {
-  const article = articleGenerator(home, "homeArticle");
+  const article = articleGenerator(homeSection, "homeArticle");
 
   mainSection.append(article);
 }
@@ -127,3 +128,6 @@ function homeGenerator() {
 headerGenerator();
 footerGenerator();
 homeGenerator();
+
+// stworzyć funkcję aboutGenerator()
+// Ogarnąć nawigację
