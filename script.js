@@ -1,4 +1,9 @@
-import { homeSection, aboutSection, messagesSection } from "./data.js";
+import {
+  homeSection,
+  aboutSection,
+  messagesSection,
+  headerSectionInfo,
+} from "./data.js";
 const mainSection = document.querySelector("main");
 
 function headerGenerator() {
@@ -59,11 +64,30 @@ function navBarGenerator() {
 }
 function navigationSupport(event) {
   const chooser = event.target.value;
+  const mainText = document.querySelector("h1");
+  const subText = document.querySelector("h2");
 
   mainSection.textContent = "";
-  if (chooser === "home") homeSectionGenerator();
-  if (chooser === "about") aboutSectionGenerator();
-  if (chooser === "messages") messagesSectionGenerator();
+  if (chooser === "home") {
+    homeSectionGenerator();
+    mainText.textContent = headerSectionInfo[0].mainText;
+    subText.textContent = headerSectionInfo[0].subText;
+  }
+  if (chooser === "about") {
+    aboutSectionGenerator();
+    mainText.textContent = headerSectionInfo[2].mainText;
+    subText.textContent = headerSectionInfo[2].subText;
+  }
+  if (chooser === "contact") {
+    contactSectionGenerator();
+    mainText.textContent = headerSectionInfo[3].mainText;
+    subText.textContent = headerSectionInfo[3].subText;
+  }
+  if (chooser === "messages") {
+    messagesSectionGenerator();
+    mainText.textContent = headerSectionInfo[4].mainText;
+    subText.textContent = headerSectionInfo[4].subText;
+  }
 }
 
 function articleGenerator(data, articleClassName) {
@@ -159,10 +183,113 @@ function messagesSectionGenerator() {
     mainSection.append(allMessagesContainer);
   });
 }
+
+function contactSectionGenerator() {
+  const contactInputNames = ["Name", "Email", "Message"];
+  const contactSection = document.createElement("div");
+  const contactForm = document.createElement("form");
+  const contactMeContainer = document.createElement("div");
+  const nameAndEmailContainer = document.createElement("div");
+  const sendMessageBtn = document.createElement("button");
+
+  nameAndEmailContainer.className = "nameAndEmailContainer";
+  contactMeContainer.className = "contactMeContainer";
+  contactMeContainer.textContent = "Contact me";
+  contactForm.className = "contactForm";
+  contactSection.className = "contactSection";
+  sendMessageBtn.className = "bigBtn";
+  sendMessageBtn.type = "submit";
+  sendMessageBtn.textContent = "Send message";
+  sendMessageBtn.addEventListener("click", tryToSendMsg);
+  contactInputNames.forEach((name) => {
+    if (name === "Message") contactForm.append(inputCreator(name));
+    else nameAndEmailContainer.append(inputCreator(name));
+  });
+  contactForm.insertBefore(nameAndEmailContainer, contactForm.firstChild);
+  contactForm.insertBefore(contactMeContainer, contactForm.firstChild);
+  contactSection.append(contactForm, sendMessageBtn);
+  mainSection.append(contactSection);
+}
+
+function inputCreator(name) {
+  const inputContainer = document.createElement("div");
+  const input = document.createElement("input");
+  const label = document.createElement("label");
+  const span = document.createElement("span");
+
+  input.id = `input${name}`;
+  label.className = "label";
+  label.for = input.id;
+  label.textContent = name;
+  span.id = `error${name}`;
+  span.className = "errorSpan";
+  if (name === "Name") input.placeholder = "Your Name";
+  if (name === "Message") input.placeholder = "Hello, my name is...";
+  if (name === "Email") input.placeholder = "email@example.com";
+  inputContainer.className = `${name.toLowerCase()}InputContainer`;
+  inputContainer.append(label, input, span);
+  return inputContainer;
+}
+function tryToSendMsg() {
+  const nameInput = document.querySelector("#inputName");
+  const emailInput = document.querySelector("#inputEmail");
+  const messageInput = document.querySelector("#inputMessage");
+  let isNameValid =
+    nameInput.value.length >= 3 && nameInput.value.length < 20 ? true : false;
+  let isEmailValid = emailInput.value.includes("@") ? true : false;
+  let isMessageValid =
+    messageInput.value.length > 0 && messageInput.value.length < 100
+      ? true
+      : false;
+
+  inputValidation(nameInput);
+  inputValidation(emailInput);
+  inputValidation(messageInput);
+  nameInput.addEventListener("keyup", () => {
+    inputValidation(nameInput);
+  });
+  emailInput.addEventListener("keyup", () => {
+    inputValidation(emailInput);
+  });
+  messageInput.addEventListener("keyup", () => {
+    inputValidation(messageInput);
+  });
+  if (isNameValid && isEmailValid && isMessageValid) {
+    const newMessage = {
+      name: nameInput.value,
+      email: emailInput.value,
+      message: messageInput.value,
+    };
+    messagesSection.push(newMessage);
+  }
+}
+function inputValidation(input) {
+  const nameSpan = document.querySelector("#errorName");
+  const emailSpan = document.querySelector("#errorEmail");
+  const messageSpan = document.querySelector("#errorMessage");
+
+  if (input.id === "inputName") {
+    const nameLength = input.value.length;
+    if (nameLength <= 2)
+      nameSpan.textContent = "The name must be at least 3 characters long.";
+    else if (nameLength > 20)
+      nameSpan.textContent = "The name must not exceed 20 characters.";
+    else nameSpan.textContent = "";
+  }
+  if (input.id === "inputEmail") {
+    const emailValue = input.value;
+    if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(emailValue))
+      emailSpan.textContent = "Please enter a valid email address";
+    else emailSpan.textContent = "";
+  }
+  if (input.id === "inputMessage") {
+    const messageLength = input.value.length;
+    if (messageLength === 0)
+      messageSpan.textContent = "The message cannot be empty.";
+    else if (messageLength > 100)
+      messageSpan.textContent = "The message must not exceed 100 characters.";
+    else messageSpan.textContent = "";
+  }
+}
 headerGenerator();
 footerGenerator();
-// homeSectionGenerator();
-// aboutSectionGenerator();
-// messagesSectionGenerator();
-
-// Ogarnąć nawigację

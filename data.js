@@ -1,8 +1,4 @@
 const homeSection = [
-  // {
-  //   headerMainText: "JAN KOWALSKI",
-  //   headerSubText: "WEB-DESIGNER",
-  // },
   {
     descName: "About me",
     desc: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.",
@@ -46,25 +42,13 @@ const homeSection = [
   },
 ];
 const projectsSection = [
-  // {
-  //   headerMainText: "MY PROJECTS",
-  //   headerSubText: "MADE WITH LOVE",
-  // },
-  // {
-  //   projects: [
   { projectName: "Calculator", technologyUsed: ["html"] },
   {
     projectName: "Portfolio",
     technologyUsed: ["html", "javascript", "css"],
   },
-  // ],
-  // },
 ];
 const aboutSection = [
-  // {
-  //   headerMainText: "ABOUT ME",
-  //   headerSubText: "IT’S A-ME, JAN!",
-  // },
   {
     descName: "My background",
     desc: `Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
@@ -87,18 +71,7 @@ Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod 
 Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla`,
   },
 ];
-// const contactSection = [
-//   {
-//     headerMainText: "CONTACT ME",
-//     headerSubText: "SAY HELLO TO ME",
-//   },
-// ];
 const messagesSection = [
-  // header: {
-  //   headerMainText: "MESSAGES",
-  //   headerSubText: "MESSAGE FROM THE INTERESTED PERSON",
-  // },
-
   {
     name: "Karol",
     email: "karol@email.com",
@@ -116,4 +89,11 @@ const messagesSection = [
     message: " Welcome Jan. You created really nice project",
   },
 ];
-export { homeSection, aboutSection, messagesSection };
+const headerSectionInfo = [
+  { mainText: "JAN KOWALSKI", subText: "WEB-DESIGNER" },
+  { mainText: "MY PROJECTS", subText: "MADE WITH LOVE" },
+  { mainText: "ABOUT ME", subText: "IT’S A-ME, JAN!" },
+  { mainText: "CONTACT ME", subText: "SAY HELLO TO ME" },
+  { mainText: "MESSAGES", subText: "MESSAGE FROM THE INTERESTED PERSON" },
+];
+export { homeSection, aboutSection, messagesSection, headerSectionInfo };
