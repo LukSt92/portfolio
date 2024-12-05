@@ -285,3 +285,6 @@ h2 {
 main > .bigBtn {
   margin-bottom: 84px;
 }
+button:hover {
+  cursor: pointer;
+}
