@@ -69,14 +69,11 @@ function navigationSupport(section) {
   const mainText = document.querySelector("h1");
   const subText = document.querySelector("h2");
   const allLinks = document.querySelectorAll("a");
+
   allLinks.forEach((link) => {
     if (link.value === chooser) link.style.color = "#ADB6C4";
     else link.style.color = "#FFFFFF";
   });
-  // allLinks
-  //   .filter((link) => link.value === chooser)
-  //   .forEach((link) => (link.style.color = "#ADB6C4"));
-
   mainSection.textContent = "";
   if (chooser === "home") {
     homeSectionGenerator();
@@ -170,8 +167,20 @@ function homeSectionGenerator() {
 }
 function aboutSectionGenerator() {
   const article = articleGenerator(aboutSection, "aboutArticle");
+  const contactBtn = document.createElement("button");
+  const arrRightImg = document.createElement("img");
+  const textSpan = document.createElement("span");
+  const contactPageSelector = document.querySelector(".contact");
 
-  mainSection.append(article);
+  arrRightImg.src = "img/arrowRight.png";
+  arrRightImg.className = "arrow";
+  textSpan.textContent = "Contact me";
+  contactBtn.className = "bigBtn";
+  contactBtn.addEventListener("click", () => {
+    navigationSupport(contactPageSelector);
+  });
+  contactBtn.append(arrRightImg, textSpan);
+  mainSection.append(article, contactBtn);
 }
 
 function messagesSectionGenerator() {
