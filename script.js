@@ -56,16 +56,26 @@ function navBarGenerator() {
     section.value = name;
     section.textContent = name.toUpperCase();
     section.href = "#";
-    section.addEventListener("click", navigationSupport);
+    section.addEventListener("click", () => {
+      navigationSupport(section);
+    });
     li.append(section);
     list.append(li);
   });
   return list;
 }
-function navigationSupport(event) {
-  const chooser = event.target.value;
+function navigationSupport(section) {
+  const chooser = section.value;
   const mainText = document.querySelector("h1");
   const subText = document.querySelector("h2");
+  const allLinks = document.querySelectorAll("a");
+  allLinks.forEach((link) => {
+    if (link.value === chooser) link.style.color = "#ADB6C4";
+    else link.style.color = "#FFFFFF";
+  });
+  // allLinks
+  //   .filter((link) => link.value === chooser)
+  //   .forEach((link) => (link.style.color = "#ADB6C4"));
 
   mainSection.textContent = "";
   if (chooser === "home") {
@@ -267,6 +277,7 @@ function inputValidation(input) {
   const nameSpan = document.querySelector("#errorName");
   const emailSpan = document.querySelector("#errorEmail");
   const messageSpan = document.querySelector("#errorMessage");
+  let isError = true;
 
   if (input.id === "inputName") {
     const nameLength = input.value.length;
@@ -274,13 +285,19 @@ function inputValidation(input) {
       nameSpan.textContent = "The name must be at least 3 characters long.";
     else if (nameLength > 20)
       nameSpan.textContent = "The name must not exceed 20 characters.";
-    else nameSpan.textContent = "";
+    else {
+      nameSpan.textContent = "";
+      isError = false;
+    }
   }
   if (input.id === "inputEmail") {
     const emailValue = input.value;
     if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(emailValue))
       emailSpan.textContent = "Please enter a valid email address";
-    else emailSpan.textContent = "";
+    else {
+      emailSpan.textContent = "";
+      isError = false;
+    }
   }
   if (input.id === "inputMessage") {
     const messageLength = input.value.length;
@@ -288,8 +305,15 @@ function inputValidation(input) {
       messageSpan.textContent = "The message cannot be empty.";
     else if (messageLength > 100)
       messageSpan.textContent = "The message must not exceed 100 characters.";
-    else messageSpan.textContent = "";
+    else {
+      messageSpan.textContent = "";
+      isError = false;
+    }
   }
+  if (isError) input.style.borderColor = "#AF0808";
+  else input.style.borderColor = "#1F2041";
 }
 headerGenerator();
 footerGenerator();
+const startingPageSelector = document.querySelector(".home");
+navigationSupport(startingPageSelector);

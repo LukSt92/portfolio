@@ -268,3 +268,9 @@ h2 {
 .currentSectionInfo {
   margin: 100px 0 179px 0;
 }
+.errorSpan {
+  font-family: Roboto;
+  font-weight: 400;
+  font-size: 12px;
+  color: var(--darkRedColor);
+}
