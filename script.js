@@ -336,6 +336,7 @@ function projectsSectionGenerator() {
   const allProjectsContainer = document.createElement("div");
   const plusIconImg = document.createElement("img");
   const textSpan = document.createElement("span");
+  const noProjectSpan = document.createElement("span");
 
   addProjectBtn.className = "bigBtn";
   addProjectBtn.id = "addProjectBtn";
@@ -344,8 +345,9 @@ function projectsSectionGenerator() {
   textSpan.textContent = "Add project";
   addProjectBtn.append(plusIconImg, textSpan);
   allProjectsContainer.className = "allProjectsContainer";
-  projectsSection.forEach((project) => {
-    const projectContainer = projectGenerator(project);
+  noProjectSpan.className = "noProjectSpan";
+  projectsSection.forEach((project, index) => {
+    const projectContainer = projectGenerator(project, index);
     const deleteBtn = document.createElement("button");
     const deleteIcon = document.createElement("img");
 
@@ -353,18 +355,22 @@ function projectsSectionGenerator() {
     deleteIcon.className = "deleteIcon";
     deleteIcon.src = "img/deleteIcon.png";
     deleteBtn.append(deleteIcon);
-    deleteBtn.addEventListener("click", deleteProject);
+    deleteBtn.addEventListener("click", () => {
+      deleteProject(project, projectContainer);
+    });
     projectContainer.append(deleteBtn);
     allProjectsContainer.append(projectContainer);
   });
-  mainSection.append(addProjectBtn, allProjectsContainer);
+  mainSection.append(addProjectBtn, allProjectsContainer, noProjectSpan);
+  noProjectsAlert();
 }
-function projectGenerator(project) {
+function projectGenerator(project, index) {
   const projectContainer = document.createElement("div");
   const projectName = document.createElement("span");
   const techList = document.createElement("ul");
 
   projectContainer.className = "projectContainer";
+  projectContainer.id = index;
   projectName.className = "projectName";
   techList.className = "techList";
   projectName.textContent = project.projectName;
@@ -378,8 +384,18 @@ function projectGenerator(project) {
   projectContainer.append(projectName, techList);
   return projectContainer;
 }
-function deleteProject() {
-  this.parentElement.remove();
+function deleteProject(project, projectToDelete) {
+  const index = projectsSection.indexOf(project);
+
+  projectsSection.splice(index, 1);
+  projectToDelete.remove();
+  noProjectsAlert();
+}
+function noProjectsAlert() {
+  const noProjectSpan = document.querySelector(".noProjectSpan");
+  if (projectsSection.length === 0)
+    noProjectSpan.textContent = "There are no projects to display";
+  else noProjectSpan.textContent = "";
 }
 headerGenerator();
 footerGenerator();
