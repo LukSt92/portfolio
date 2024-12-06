@@ -114,7 +114,8 @@ article {
   background-repeat: no-repeat;
   border-radius: 16px;
 }
-.subSectionTitle {
+.subSectionTitle,
+.noProjectSpan {
   color: var(--navyBlueColor);
   font-family: LeagueSpartan;
   font-size: 32px;
@@ -346,4 +347,7 @@ button:hover {
   position: absolute;
   bottom: 0px;
   margin: 8px;
+}
+.noProjectSpan {
+  margin-bottom: 84px;
 }

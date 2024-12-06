@@ -336,7 +336,6 @@ function projectsSectionGenerator() {
   const allProjectsContainer = document.createElement("div");
   const plusIconImg = document.createElement("img");
   const textSpan = document.createElement("span");
-  const noProjectSpan = document.createElement("span");
 
   addProjectBtn.className = "bigBtn";
   addProjectBtn.id = "addProjectBtn";
@@ -345,7 +344,6 @@ function projectsSectionGenerator() {
   textSpan.textContent = "Add project";
   addProjectBtn.append(plusIconImg, textSpan);
   allProjectsContainer.className = "allProjectsContainer";
-  noProjectSpan.className = "noProjectSpan";
   projectsSection.forEach((project, index) => {
     const projectContainer = projectGenerator(project, index);
     const deleteBtn = document.createElement("button");
@@ -361,7 +359,7 @@ function projectsSectionGenerator() {
     projectContainer.append(deleteBtn);
     allProjectsContainer.append(projectContainer);
   });
-  mainSection.append(addProjectBtn, allProjectsContainer, noProjectSpan);
+  mainSection.append(addProjectBtn, allProjectsContainer);
   noProjectsAlert();
 }
 function projectGenerator(project, index) {
@@ -392,10 +390,16 @@ function deleteProject(project, projectToDelete) {
   noProjectsAlert();
 }
 function noProjectsAlert() {
-  const noProjectSpan = document.querySelector(".noProjectSpan");
-  if (projectsSection.length === 0)
-    noProjectSpan.textContent = "There are no projects to display";
-  else noProjectSpan.textContent = "";
+  const noProjectSpan = document.createElement("span");
+  const allProjectsContainer = document.querySelector(".allProjectsContainer");
+
+  noProjectSpan.className = "noProjectSpan";
+  noProjectSpan.textContent = "There are no projects to display";
+
+  if (projectsSection.length === 0) {
+    allProjectsContainer.remove();
+    mainSection.append(noProjectSpan);
+  } else noProjectSpan.remove();
 }
 headerGenerator();
 footerGenerator();
