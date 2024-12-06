@@ -47,6 +47,18 @@ const projectsSection = [
     projectName: "Portfolio",
     technologyUsed: ["html", "javascript", "css"],
   },
+  {
+    projectName: "Portfolio",
+    technologyUsed: ["html", "javascript", "css"],
+  },
+  {
+    projectName: "Portfolio",
+    technologyUsed: ["html", "javascript", "css"],
+  },
+  {
+    projectName: "Portfolio",
+    technologyUsed: ["html", "javascript", "css"],
+  },
 ];
 const aboutSection = [
   {
@@ -96,4 +108,10 @@ const headerSectionInfo = [
   { mainText: "CONTACT ME", subText: "SAY HELLO TO ME" },
   { mainText: "MESSAGES", subText: "MESSAGE FROM THE INTERESTED PERSON" },
 ];
-export { homeSection, aboutSection, messagesSection, headerSectionInfo };
+export {
+  homeSection,
+  aboutSection,
+  messagesSection,
+  headerSectionInfo,
+  projectsSection,
+};

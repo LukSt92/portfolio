@@ -177,6 +177,7 @@ body {
   display: flex;
   flex-direction: column;
   max-width: 1920px;
+  margin: 0;
 }
 main {
   display: flex;
@@ -235,7 +236,7 @@ label {
 .contactMeContainer {
   font-size: 32px;
 }
-button {
+.bigBtn {
   font-family: Roboto;
   font-size: 16px;
   color: var(--navyBlueColor);
@@ -287,4 +288,62 @@ main > .bigBtn {
 }
 button:hover {
   cursor: pointer;
+}
+.projectContainer {
+  width: 360px;
+  height: 460px;
+  border-radius: 16px;
+  background-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 1),
+      rgba(0, 0, 0, 0)
+    ),
+    url(img/testprojectbackground.jpg);
+  background-repeat: no-repeat;
+  background-size: 100% 120%;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding-left: 30px;
+  box-sizing: border-box;
+  position: relative;
+}
+.projectName {
+  font-family: Roboto;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--whiteColor);
+  margin-top: 18px;
+}
+.techList {
+  display: flex;
+  flex-direction: column;
+  margin: 0px 25px;
+  list-style-type: disc;
+  font-family: Roboto;
+  font-weight: 400;
+}
+.allProjectsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 41px;
+  row-gap: 84px;
+  margin: 0 139px 84px;
+}
+#addProjectBtn {
+  margin-top: 84px;
+}
+.deleteBtn {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 9.03px;
+  align-self: flex-end;
+  position: absolute;
+  bottom: 0px;
+  margin: 8px;
 }

@@ -3,6 +3,7 @@ import {
   aboutSection,
   messagesSection,
   headerSectionInfo,
+  projectsSection,
 } from "./data.js";
 const mainSection = document.querySelector("main");
 
@@ -280,6 +281,9 @@ function tryToSendMsg() {
       message: messageInput.value,
     };
     messagesSection.push(newMessage);
+    nameInput.value = "";
+    emailInput.value = "";
+    messageInput.value = "";
   }
 }
 function inputValidation(input) {
@@ -324,5 +328,53 @@ function inputValidation(input) {
 }
 headerGenerator();
 footerGenerator();
-const startingPageSelector = document.querySelector(".home");
-navigationSupport(startingPageSelector);
+// const startingPageSelector = document.querySelector(".home");
+// navigationSupport(startingPageSelector);
+
+function projectsSectionGenerator() {
+  const addProjectBtn = document.createElement("button");
+  const allProjectsContainer = document.createElement("div");
+  const plusIconImg = document.createElement("img");
+  const textSpan = document.createElement("span");
+
+  addProjectBtn.className = "bigBtn";
+  addProjectBtn.id = "addProjectBtn";
+  plusIconImg.className = "plusIcon";
+  plusIconImg.src = "img/plusIcon.png";
+  textSpan.textContent = "Add project";
+  addProjectBtn.append(plusIconImg, textSpan);
+  allProjectsContainer.className = "allProjectsContainer";
+  projectsSection.forEach((project) => {
+    const projectContainer = projectGenerator(project);
+    const deleteBtn = document.createElement("button");
+    const deleteIcon = document.createElement("img");
+
+    deleteBtn.className = "deleteBtn";
+    deleteIcon.className = "deleteIcon";
+    deleteIcon.src = "img/deleteIcon.png";
+    deleteBtn.append(deleteIcon);
+    projectContainer.append(deleteBtn);
+    allProjectsContainer.append(projectContainer);
+  });
+  mainSection.append(addProjectBtn, allProjectsContainer);
+}
+function projectGenerator(project) {
+  const projectContainer = document.createElement("div");
+  const projectName = document.createElement("span");
+  const techList = document.createElement("ul");
+
+  projectContainer.className = "projectContainer";
+  projectName.className = "projectName";
+  techList.className = "techList";
+  projectName.textContent = project.projectName;
+  project.technologyUsed.forEach((tech) => {
+    const techName = document.createElement("li");
+
+    techName.className = "techName";
+    techName.textContent = tech;
+    techList.append(techName);
+  });
+  projectContainer.append(projectName, techList);
+  return projectContainer;
+}
+projectsSectionGenerator();
