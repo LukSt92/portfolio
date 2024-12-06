@@ -353,6 +353,7 @@ function projectsSectionGenerator() {
     deleteIcon.className = "deleteIcon";
     deleteIcon.src = "img/deleteIcon.png";
     deleteBtn.append(deleteIcon);
+    deleteBtn.addEventListener("click", deleteProject);
     projectContainer.append(deleteBtn);
     allProjectsContainer.append(projectContainer);
   });
@@ -376,6 +377,9 @@ function projectGenerator(project) {
   });
   projectContainer.append(projectName, techList);
   return projectContainer;
+}
+function deleteProject() {
+  this.parentElement.remove();
 }
 headerGenerator();
 footerGenerator();
