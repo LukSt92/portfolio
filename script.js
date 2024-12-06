@@ -81,6 +81,11 @@ function navigationSupport(section) {
     mainText.textContent = headerSectionInfo[0].mainText;
     subText.textContent = headerSectionInfo[0].subText;
   }
+  if (chooser === "projects") {
+    projectsSectionGenerator();
+    mainText.textContent = headerSectionInfo[1].mainText;
+    subText.textContent = headerSectionInfo[1].subText;
+  }
   if (chooser === "about") {
     aboutSectionGenerator();
     mainText.textContent = headerSectionInfo[2].mainText;
@@ -326,11 +331,6 @@ function inputValidation(input) {
   if (isError) input.style.borderColor = "#AF0808";
   else input.style.borderColor = "#1F2041";
 }
-headerGenerator();
-footerGenerator();
-// const startingPageSelector = document.querySelector(".home");
-// navigationSupport(startingPageSelector);
-
 function projectsSectionGenerator() {
   const addProjectBtn = document.createElement("button");
   const allProjectsContainer = document.createElement("div");
@@ -377,4 +377,7 @@ function projectGenerator(project) {
   projectContainer.append(projectName, techList);
   return projectContainer;
 }
-projectsSectionGenerator();
+headerGenerator();
+footerGenerator();
+const startingPageSelector = document.querySelector(".home");
+navigationSupport(startingPageSelector);
