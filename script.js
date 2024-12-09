@@ -236,11 +236,12 @@ function contactSectionGenerator() {
   mainSection.append(contactSection);
 }
 
-function inputCreator(name) {
+function inputCreator(inputName) {
   const inputContainer = document.createElement("div");
   const input = document.createElement("input");
   const label = document.createElement("label");
   const span = document.createElement("span");
+  const name = inputName.replace("-", " ");
 
   input.id = `input${name}`;
   label.className = "label";
@@ -251,6 +252,8 @@ function inputCreator(name) {
   if (name === "Name") input.placeholder = "Your Name";
   if (name === "Message") input.placeholder = "Hello, my name is...";
   if (name === "Email") input.placeholder = "email@example.com";
+  if (name === "Project title") input.placeholder = name;
+  if (name === "Technologies") input.placeholder = "html,css,javascript";
   inputContainer.className = `${name.toLowerCase()}InputContainer`;
   inputContainer.append(label, input, span);
   return inputContainer;
@@ -343,6 +346,7 @@ function projectsSectionGenerator() {
   plusIconImg.src = "img/plusIcon.png";
   textSpan.textContent = "Add project";
   addProjectBtn.append(plusIconImg, textSpan);
+  addProjectBtn.addEventListener("click", () => modalSupport(true));
   allProjectsContainer.className = "allProjectsContainer";
   projectsSection.forEach((project, index) => {
     const projectContainer = projectGenerator(project, index);
@@ -361,6 +365,7 @@ function projectsSectionGenerator() {
   });
   mainSection.append(addProjectBtn, allProjectsContainer);
   noProjectsAlert();
+  modalGenerator();
 }
 function projectGenerator(project, index) {
   const projectContainer = document.createElement("div");
@@ -400,6 +405,42 @@ function noProjectsAlert() {
     allProjectsContainer.remove();
     mainSection.append(noProjectSpan);
   } else noProjectSpan.remove();
+}
+function modalGenerator() {
+  const newProjectInputsNames = ["Project-title", "Technologies"];
+  const modalContainer = document.createElement("section");
+  const closeBtn = document.createElement("button");
+  const newProjectForm = document.createElement("form");
+  const addProjectBtn = document.createElement("button");
+  const plusIconImg = document.createElement("img");
+  const textSpan = document.createElement("span");
+  const overlayWall = document.createElement("div");
+
+  modalContainer.className = "modalContainer hidden";
+  closeBtn.className = "closeBtn";
+  closeBtn.addEventListener("click", () => modalSupport(false));
+  newProjectForm.className = "newProjectForm";
+  addProjectBtn.className = "bigBtn";
+  plusIconImg.src = "img/plusIcon.png";
+  textSpan.textContent = "Add project";
+  addProjectBtn.append(plusIconImg, textSpan);
+  overlayWall.className = "overlayWall hidden";
+  newProjectInputsNames.forEach((name) =>
+    newProjectForm.append(inputCreator(name))
+  );
+  modalContainer.append(closeBtn, newProjectForm, addProjectBtn);
+  mainSection.append(modalContainer, overlayWall);
+}
+function modalSupport(isVisible) {
+  const modal = document.querySelector(".modalContainer");
+  const overlayWall = document.querySelector(".overlayWall");
+  if (isVisible) {
+    modal.classList.remove("hidden");
+    overlayWall.classList.remove("hidden");
+  } else {
+    modal.classList.add("hidden");
+    overlayWall.classList.add("hidden");
+  }
 }
 headerGenerator();
 footerGenerator();

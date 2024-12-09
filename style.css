@@ -59,11 +59,6 @@ a {
   color: var(--whiteColor);
   text-decoration: none;
 }
-
-main {
-  background-color: var(--ghostWhiteColor);
-}
-
 footer {
   display: flex;
   justify-content: space-between;
@@ -184,6 +179,8 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: var(--ghostWhiteColor);
+  position: relative;
 }
 .allMessagesContainer {
   margin: 65px 120px;
@@ -219,6 +216,7 @@ input {
   border: none;
   border-bottom: 2px solid var(--navyBlueColor);
   background-color: var(--ghostWhiteColor);
+  margin-top: 27px;
 }
 input::placeholder {
   font-family: Roboto;
@@ -350,4 +348,51 @@ button:hover {
 }
 .noProjectSpan {
   margin-bottom: 84px;
+}
+.modalContainer {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  width: 800px;
+  background-color: var(--ghostWhiteColor);
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.25) inset;
+  row-gap: 56px;
+  position: absolute;
+  top: 30%;
+  z-index: 2;
+}
+.closeBtn {
+  position: absolute;
+  align-self: flex-end;
+  color: var(--navyBlueColor);
+  width: 12px;
+  height: 12px;
+  border: none;
+  background-color: var(--ghostWhiteColor);
+  background-image: url(img/closeIcon.png);
+  background-size: contain;
+  margin: 12px;
+}
+.newProjectForm {
+  display: flex;
+  flex-direction: column;
+  row-gap: 60px;
+  margin: 60px 120px 0;
+}
+.modalContainer > .bigBtn {
+  margin-bottom: 64px;
+}
+.overlayWall {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(5px);
+  z-index: 1;
+}
+.hidden {
+  display: none;
 }
