@@ -236,12 +236,11 @@ function contactSectionGenerator() {
   mainSection.append(contactSection);
 }
 
-function inputCreator(inputName) {
+function inputCreator(name) {
   const inputContainer = document.createElement("div");
   const input = document.createElement("input");
   const label = document.createElement("label");
   const span = document.createElement("span");
-  const name = inputName.replace("-", " ");
 
   input.id = `input${name}`;
   label.className = "label";
@@ -252,8 +251,11 @@ function inputCreator(inputName) {
   if (name === "Name") input.placeholder = "Your Name";
   if (name === "Message") input.placeholder = "Hello, my name is...";
   if (name === "Email") input.placeholder = "email@example.com";
-  if (name === "Project title") input.placeholder = name;
   if (name === "Technologies") input.placeholder = "html,css,javascript";
+  if (name === "Project") {
+    label.textContent += " title";
+    input.placeholder = label.textContent;
+  }
   inputContainer.className = `${name.toLowerCase()}InputContainer`;
   inputContainer.append(label, input, span);
   return inputContainer;
@@ -298,6 +300,8 @@ function inputValidation(input) {
   const nameSpan = document.querySelector("#errorName");
   const emailSpan = document.querySelector("#errorEmail");
   const messageSpan = document.querySelector("#errorMessage");
+  const projectSpan = document.querySelector("#errorProject");
+  const technologiesSpan = document.querySelector("#errorTechnologies");
   let isError = true;
 
   if (input.id === "inputName") {
@@ -328,6 +332,26 @@ function inputValidation(input) {
       messageSpan.textContent = "The message must not exceed 100 characters.";
     else {
       messageSpan.textContent = "";
+      isError = false;
+    }
+  }
+  if (input.id === "inputProject") {
+    const projectNameLength = input.value.length;
+    if (projectNameLength <= 2)
+      projectSpan.textContent = "The title must be at least 3 characters long.";
+    else if (projectNameLength > 30)
+      projectSpan.textContent = "The title must not exceed 20 characters.";
+    else {
+      projectSpan.textContent = "";
+      isError = false;
+    }
+  }
+  if (input.id === "inputTechnologies") {
+    const technologiesLength = input.value.length;
+    if (technologiesLength === 0)
+      technologiesSpan.textContent = "Please add some technologies.";
+    else {
+      technologiesSpan.textContent = "";
       isError = false;
     }
   }
@@ -381,7 +405,7 @@ function projectGenerator(project, index) {
     const techName = document.createElement("li");
 
     techName.className = "techName";
-    techName.textContent = tech;
+    techName.textContent = tech.toUpperCase();
     techList.append(techName);
   });
   projectContainer.append(projectName, techList);
@@ -407,7 +431,7 @@ function noProjectsAlert() {
   } else noProjectSpan.remove();
 }
 function modalGenerator() {
-  const newProjectInputsNames = ["Project-title", "Technologies"];
+  const newProjectInputsNames = ["Project", "Technologies"];
   const modalContainer = document.createElement("section");
   const closeBtn = document.createElement("button");
   const newProjectForm = document.createElement("form");
@@ -421,6 +445,7 @@ function modalGenerator() {
   closeBtn.addEventListener("click", () => modalSupport(false));
   newProjectForm.className = "newProjectForm";
   addProjectBtn.className = "bigBtn";
+  addProjectBtn.addEventListener("click", tryToAddNewProject);
   plusIconImg.src = "img/plusIcon.png";
   textSpan.textContent = "Add project";
   addProjectBtn.append(plusIconImg, textSpan);
@@ -440,6 +465,36 @@ function modalSupport(isVisible) {
   } else {
     modal.classList.add("hidden");
     overlayWall.classList.add("hidden");
+  }
+}
+function tryToAddNewProject() {
+  const projectNameInput = document.querySelector("#inputProject");
+  const technologiesInput = document.querySelector("#inputTechnologies");
+  const projectsPageSelector = document.querySelector(".projects");
+  let isprojectNameValid =
+    projectNameInput.value.length >= 3 && projectNameInput.value.length < 30
+      ? true
+      : false;
+  let isTechnologiesValid = technologiesInput.value.length > 0 ? true : false;
+
+  inputValidation(projectNameInput);
+  inputValidation(technologiesInput);
+  projectNameInput.addEventListener("keyup", () => {
+    inputValidation(projectNameInput);
+  });
+  technologiesInput.addEventListener("keyup", () => {
+    inputValidation(technologiesInput);
+  });
+  if (isprojectNameValid && isTechnologiesValid) {
+    const newProject = {
+      projectName: projectNameInput.value,
+      technologyUsed: technologiesInput.value.split(","),
+    };
+    projectsSection.push(newProject);
+    projectNameInput.value = "";
+    technologiesInput.value = "";
+    modalSupport(false);
+    navigationSupport(projectsPageSelector);
   }
 }
 headerGenerator();
