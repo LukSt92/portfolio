@@ -168,8 +168,11 @@ function skillGenerator(skill) {
 
 function homeSectionGenerator() {
   const article = articleGenerator(homeSection, "homeArticle");
+  const projects = homeSectionProjectsGenerator();
+  const buttons = homeSectionButtonsGenerator();
 
-  mainSection.append(article);
+  mainSection.append(article, projects);
+  if (projectsSection.length > 3) mainSection.append(buttons);
 }
 function aboutSectionGenerator() {
   const article = articleGenerator(aboutSection, "aboutArticle");
@@ -372,8 +375,8 @@ function projectsSectionGenerator() {
   addProjectBtn.append(plusIconImg, textSpan);
   addProjectBtn.addEventListener("click", () => modalSupport(true));
   allProjectsContainer.className = "allProjectsContainer";
-  projectsSection.forEach((project, index) => {
-    const projectContainer = projectGenerator(project, index);
+  projectsSection.forEach((project) => {
+    const projectContainer = projectGenerator(project);
     const deleteBtn = document.createElement("button");
     const deleteIcon = document.createElement("img");
 
@@ -391,13 +394,12 @@ function projectsSectionGenerator() {
   noProjectsAlert();
   modalGenerator();
 }
-function projectGenerator(project, index) {
+function projectGenerator(project) {
   const projectContainer = document.createElement("div");
   const projectName = document.createElement("span");
   const techList = document.createElement("ul");
 
   projectContainer.className = "projectContainer";
-  projectContainer.id = index;
   projectName.className = "projectName";
   techList.className = "techList";
   projectName.textContent = project.projectName;
@@ -497,6 +499,61 @@ function tryToAddNewProject() {
     navigationSupport(projectsPageSelector);
   }
 }
+function homeSectionProjectsGenerator(index = 0) {
+  const projectsContainer = document.createElement("div");
+  let startingIndex = index;
+
+  projectsContainer.className = "allProjectsContainer";
+  for (let i = 0; i < 3; i++) {
+    if (startingIndex < 0)
+      startingIndex = projectsSection.length + startingIndex;
+    const projectToShow = projectGenerator(projectsSection[startingIndex]);
+    projectsContainer.append(projectToShow);
+    startingIndex++;
+    if (startingIndex === projectsSection.length) startingIndex = 0;
+  }
+  return projectsContainer;
+}
+function homeSectionButtonsGenerator() {
+  const btnsContainer = document.createElement("div");
+  const ascBtn = document.createElement("button");
+  const descBtn = document.createElement("button");
+  const arrowRightImg = document.createElement("img");
+  const arrowLeftImg = document.createElement("img");
+  let test = 0;
+
+  btnsContainer.className = "homeSectionBtnsContainer";
+  ascBtn.className = "homeSectionBtns";
+  descBtn.className = "homeSectionBtns";
+  arrowRightImg.src = "img/arrowRight.png";
+  arrowLeftImg.src = "img/arrowLeft.png";
+  ascBtn.addEventListener("click", () => {
+    test++;
+    if (test >= projectsSection.length) test = 0;
+    carouselSupport(test);
+  });
+  descBtn.addEventListener("click", () => {
+    test--;
+    if (test <= projectsSection.length * -1) test = 0;
+    carouselSupport(test);
+  });
+  ascBtn.append(arrowRightImg);
+  descBtn.append(arrowLeftImg);
+  btnsContainer.append(descBtn, ascBtn);
+  return btnsContainer;
+}
+function carouselSupport(test) {
+  const allProjectsContainer = document.querySelector(".allProjectsContainer");
+  const homeSectionBtnsContainer = document.querySelector(
+    ".homeSectionBtnsContainer"
+  );
+  mainSection.removeChild(allProjectsContainer);
+  mainSection.insertBefore(
+    homeSectionProjectsGenerator(test),
+    homeSectionBtnsContainer
+  );
+}
+//Zamienić nazwy na bardziej sensowniejsze test etc..!!!!
 headerGenerator();
 footerGenerator();
 const startingPageSelector = document.querySelector(".home");

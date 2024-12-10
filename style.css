@@ -396,3 +396,20 @@ button:hover {
 .hidden {
   display: none;
 }
+.homeSectionBtns {
+  width: 60px;
+  height: 60px;
+  border: none;
+  border-radius: 8px;
+  padding: 10px;
+  background-color: var(--cadetBlueColor);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.homeSectionBtnsContainer {
+  display: flex;
+  gap: 55px;
+  margin-bottom: 84px;
+}
