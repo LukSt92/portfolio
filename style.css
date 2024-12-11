@@ -22,8 +22,13 @@
   src: url(fonts/LeagueSpartan-Regular.ttf);
 }
 header {
+  box-sizing: border-box;
   background-color: var(--navyBlueColor);
   padding: 37px 120px 0;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .logoAndNavBar {
   display: flex;
@@ -61,12 +66,12 @@ a {
 }
 footer {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   background-color: var(--navyBlueColor);
   padding: 60px 120px;
-  height: 300px; /* do zmiany */
   font-family: Roboto;
   font-weight: 700;
+  height: 400px;
 }
 
 footer p {
@@ -129,6 +134,7 @@ article {
 .skillSection {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 32px;
   padding-top: 13px;
 }
@@ -172,8 +178,8 @@ article {
 body {
   display: flex;
   flex-direction: column;
-  max-width: 1920px;
   margin: 0;
+  min-width: 320px;
 }
 main {
   display: flex;
@@ -202,7 +208,7 @@ main {
 }
 .contactForm {
   max-width: 1920px;
-  padding: 65px 120px;
+  margin: 65px 120px;
   display: flex;
   flex-direction: column;
   gap: 65px;
@@ -225,7 +231,7 @@ input::placeholder {
 }
 .nameInputContainer,
 .emailInputContainer {
-  width: 50%;
+  width: 100%;
 }
 .contactMeContainer,
 label {
@@ -353,7 +359,7 @@ button:hover {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  width: 800px;
+  width: clamp(300px, 90%, 800px);
   background-color: var(--ghostWhiteColor);
   box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.25) inset;
   row-gap: 56px;
@@ -396,6 +402,14 @@ button:hover {
 .hidden {
   display: none;
 }
+.homeProjectsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  column-gap: 41px;
+  row-gap: 41px;
+  margin-bottom: 84px;
+}
 .homeSectionBtns {
   width: 60px;
   height: 60px;
@@ -412,4 +426,96 @@ button:hover {
   display: flex;
   gap: 55px;
   margin-bottom: 84px;
+}
+header > *,
+footer > * {
+  max-width: 1920px;
+  width: 100%;
+}
+.footerContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.hamburgerBtn {
+  display: none;
+  background-color: var(--navyBlueColor);
+  border: none;
+  width: 50px;
+  height: 50px;
+}
+.homeArticle,
+.aboutArticle {
+  margin-left: 16px;
+  margin-right: 16px;
+}
+.homeProjectsContainer,
+.allProjectsContainer {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+@media (width <= 768px) {
+  .hamburgerBtn {
+    display: block;
+  }
+  header {
+    padding: 10px 16px 0;
+  }
+  header ul {
+    display: none;
+  }
+  footer ul {
+    display: none;
+  }
+  header > div > div > .secPartLogo {
+    display: none;
+  }
+  footer {
+    padding: 60px 18px;
+    height: auto;
+  }
+  .footerContainer {
+    justify-content: center;
+  }
+  .contactDataAndLogo {
+    align-self: center;
+  }
+  .currentSectionInfo {
+    margin: 57px 0 120px;
+  }
+  .nameAndEmailContainer {
+    flex-direction: column;
+    gap: 40px;
+  }
+  .contactForm {
+    gap: 30px;
+    margin: 84px 10px;
+  }
+  .messageInputContainer {
+    margin-top: 10px;
+  }
+  .contactSection > .bigBtn {
+    width: 300px;
+    margin-bottom: 84px;
+  }
+  .allMessagesContainer {
+    margin: 84px 10px;
+  }
+  .allProjectsContainer {
+    flex-direction: column;
+    row-gap: 41px;
+    margin-bottom: 41px;
+  }
+  .projectContainer {
+    width: 300px;
+  }
+  .newProjectForm {
+    margin: 40px 10px 0;
+  }
+  .modalContainer {
+    row-gap: 40px;
+  }
+  .modalContainer > .bigBtn {
+    margin-bottom: 40px;
+  }
 }

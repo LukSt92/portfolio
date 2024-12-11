@@ -11,8 +11,9 @@ function headerGenerator() {
   const logoAndNavbar = document.querySelector(".logoAndNavBar");
   const logo = logoGenerator();
   const navBar = navBarGenerator();
+  const hamburgerMenu = hamburgerMenuGenerator();
 
-  logoAndNavbar.append(logo, navBar);
+  logoAndNavbar.append(logo, navBar, hamburgerMenu);
 }
 
 function footerGenerator() {
@@ -64,6 +65,16 @@ function navBarGenerator() {
     list.append(li);
   });
   return list;
+}
+function hamburgerMenuGenerator() {
+  const hamburgerBtn = document.createElement("button");
+  const hamburgerIcon = document.createElement("img");
+
+  hamburgerBtn.className = "hamburgerBtn";
+  hamburgerIcon.className = "hamburgerIcon";
+  hamburgerIcon.src = "img/hamburgerMenu.png";
+  hamburgerBtn.append(hamburgerIcon);
+  return hamburgerBtn;
 }
 function navigationSupport(section) {
   const chooser = section.value;
@@ -499,11 +510,10 @@ function tryToAddNewProject() {
     navigationSupport(projectsPageSelector);
   }
 }
-function homeSectionProjectsGenerator(index = 0) {
+function homeSectionProjectsGenerator(startingIndex = 0) {
   const projectsContainer = document.createElement("div");
-  let startingIndex = index;
 
-  projectsContainer.className = "allProjectsContainer";
+  projectsContainer.className = "homeProjectsContainer";
   for (let i = 0; i < 3; i++) {
     if (startingIndex < 0)
       startingIndex = projectsSection.length + startingIndex;
@@ -520,7 +530,7 @@ function homeSectionButtonsGenerator() {
   const descBtn = document.createElement("button");
   const arrowRightImg = document.createElement("img");
   const arrowLeftImg = document.createElement("img");
-  let test = 0;
+  let startingIndex = 0;
 
   btnsContainer.className = "homeSectionBtnsContainer";
   ascBtn.className = "homeSectionBtns";
@@ -528,32 +538,31 @@ function homeSectionButtonsGenerator() {
   arrowRightImg.src = "img/arrowRight.png";
   arrowLeftImg.src = "img/arrowLeft.png";
   ascBtn.addEventListener("click", () => {
-    test++;
-    if (test >= projectsSection.length) test = 0;
-    carouselSupport(test);
+    startingIndex++;
+    if (startingIndex >= projectsSection.length) startingIndex = 0;
+    carouselSupport(startingIndex);
   });
   descBtn.addEventListener("click", () => {
-    test--;
-    if (test <= projectsSection.length * -1) test = 0;
-    carouselSupport(test);
+    startingIndex--;
+    if (startingIndex <= projectsSection.length * -1) startingIndex = 0;
+    carouselSupport(startingIndex);
   });
   ascBtn.append(arrowRightImg);
   descBtn.append(arrowLeftImg);
   btnsContainer.append(descBtn, ascBtn);
   return btnsContainer;
 }
-function carouselSupport(test) {
+function carouselSupport(startingIndex) {
   const allProjectsContainer = document.querySelector(".allProjectsContainer");
   const homeSectionBtnsContainer = document.querySelector(
     ".homeSectionBtnsContainer"
   );
   mainSection.removeChild(allProjectsContainer);
   mainSection.insertBefore(
-    homeSectionProjectsGenerator(test),
+    homeSectionProjectsGenerator(startingIndex),
     homeSectionBtnsContainer
   );
 }
-//Zamienić nazwy na bardziej sensowniejsze test etc..!!!!
 headerGenerator();
 footerGenerator();
 const startingPageSelector = document.querySelector(".home");
