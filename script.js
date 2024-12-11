@@ -575,11 +575,13 @@ function homeSectionButtonsGenerator() {
   return btnsContainer;
 }
 function carouselSupport(startingIndex) {
-  const allProjectsContainer = document.querySelector(".allProjectsContainer");
+  const homeProjectsContainer = document.querySelector(
+    ".homeProjectsContainer"
+  );
   const homeSectionBtnsContainer = document.querySelector(
     ".homeSectionBtnsContainer"
   );
-  mainSection.removeChild(allProjectsContainer);
+  mainSection.removeChild(homeProjectsContainer);
   mainSection.insertBefore(
     homeSectionProjectsGenerator(startingIndex),
     homeSectionBtnsContainer

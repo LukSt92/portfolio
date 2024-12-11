@@ -65,6 +65,7 @@ a {
   text-decoration: none;
 }
 footer {
+  box-sizing: border-box;
   display: flex;
   justify-content: center;
   background-color: var(--navyBlueColor);
@@ -72,6 +73,7 @@ footer {
   font-family: Roboto;
   font-weight: 700;
   height: 400px;
+  bottom: 0;
 }
 
 footer p {
@@ -180,8 +182,10 @@ body {
   flex-direction: column;
   margin: 0;
   min-width: 320px;
+  min-height: 100vh;
 }
 main {
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -330,11 +334,12 @@ button:hover {
   font-weight: 400;
 }
 .allProjectsContainer {
+  max-width: 1200px;
   display: flex;
   flex-wrap: wrap;
   column-gap: 41px;
   row-gap: 84px;
-  margin: 0 139px 84px;
+  margin: 0 10px 84px;
 }
 #addProjectBtn {
   margin-top: 84px;
@@ -364,7 +369,6 @@ button:hover {
   box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.25) inset;
   row-gap: 56px;
   position: absolute;
-  top: 30%;
   z-index: 2;
 }
 .closeBtn {
@@ -451,12 +455,20 @@ footer > * {
   margin-left: 16px;
   margin-right: 16px;
 }
-.homeProjectsContainer,
-.allProjectsContainer {
-  margin-left: 10px;
-  margin-right: 10px;
+@media (width <= 1182px) {
+  .projectContainer {
+    width: 300px;
+  }
+  @media (width < 1024px) {
+    .homeProjectsContainer {
+      flex-direction: column;
+    }
+    .homeSectionBtns {
+      transform: rotate(90deg);
+    }
+  }
 }
-@media (width <= 768px) {
+@media (width < 768px) {
   .hamburgerBtn {
     display: block;
   }
@@ -505,11 +517,9 @@ footer > * {
   }
   .allProjectsContainer {
     flex-direction: column;
+    justify-content: center;
     row-gap: 41px;
     margin-bottom: 41px;
-  }
-  .projectContainer {
-    width: 300px;
   }
   .newProjectForm {
     margin: 40px 10px 0;
@@ -534,5 +544,9 @@ footer > * {
     z-index: 1;
     padding: 28px 37px;
     box-shadow: 0px 4px 4px rgba(255, 255, 255, 0.25);
+  }
+  .homeProjectsContainer {
+    margin-left: 10px;
+    margin-right: 10px;
   }
 }
