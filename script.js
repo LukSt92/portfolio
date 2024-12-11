@@ -67,14 +67,36 @@ function navBarGenerator() {
   return list;
 }
 function hamburgerMenuGenerator() {
+  const hamburgerContainer = document.createElement("div");
   const hamburgerBtn = document.createElement("button");
   const hamburgerIcon = document.createElement("img");
+  const hamburgerNav = navBarGenerator();
 
+  hamburgerContainer.className = "hamburgerContainer";
   hamburgerBtn.className = "hamburgerBtn";
   hamburgerIcon.className = "hamburgerIcon";
+  hamburgerNav.className = "hamburgerNav hidden";
+  hamburgerBtn.value = 0;
   hamburgerIcon.src = "img/hamburgerMenu.png";
+  hamburgerBtn.addEventListener("click", () =>
+    hamburgerMenuSupport(hamburgerNav)
+  );
   hamburgerBtn.append(hamburgerIcon);
-  return hamburgerBtn;
+  hamburgerContainer.append(hamburgerBtn, hamburgerNav);
+  return hamburgerContainer;
+}
+function hamburgerMenuSupport(hamburgerNav) {
+  const hamburgerIcon = document.querySelector(".hamburgerIcon");
+  const activeSrc = "img/hamburgerMenuActive.png";
+  const inactiveSrc = "img/hamburgerMenu.png";
+  const isNavVisible = hamburgerNav.classList.contains("hidden");
+  if (isNavVisible) {
+    hamburgerNav.classList.remove("hidden");
+    hamburgerIcon.src = activeSrc;
+  } else {
+    hamburgerNav.classList.add("hidden");
+    hamburgerIcon.src = inactiveSrc;
+  }
 }
 function navigationSupport(section) {
   const chooser = section.value;
