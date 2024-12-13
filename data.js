@@ -108,10 +108,12 @@ const headerSectionInfo = [
   { mainText: "CONTACT ME", subText: "SAY HELLO TO ME" },
   { mainText: "MESSAGES", subText: "MESSAGE FROM THE INTERESTED PERSON" },
 ];
+const sectionNames = ["home", "projects", "about", "contact", "messages"];
 export {
   homeSection,
   aboutSection,
   messagesSection,
   headerSectionInfo,
   projectsSection,
+  sectionNames,
 };

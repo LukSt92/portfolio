@@ -536,6 +536,8 @@ footer > * {
   .hamburgerNav {
     flex-direction: column;
     position: absolute;
+    left: 0;
+    box-sizing: border-box;
     background-color: var(--navyBlueColor);
     border: 1px solid var(--ghostWhiteColor);
     border-left: none;

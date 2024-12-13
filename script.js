@@ -4,9 +4,18 @@ import {
   messagesSection,
   headerSectionInfo,
   projectsSection,
+  sectionNames,
 } from "./data.js";
 const mainSection = document.querySelector("main");
 
+firstLoading();
+
+function firstLoading() {
+  headerGenerator();
+  footerGenerator();
+  const startingPageSelector = document.querySelector(".home");
+  navigationSupport(startingPageSelector);
+}
 function headerGenerator() {
   const logoAndNavbar = document.querySelector(".logoAndNavBar");
   const logo = logoGenerator();
@@ -15,7 +24,6 @@ function headerGenerator() {
 
   logoAndNavbar.append(logo, navBar, hamburgerMenu);
 }
-
 function footerGenerator() {
   const footerNavBar = document.querySelector(".footerNavBar");
   const contactDataAndLogo = document.querySelector(".contactDataAndLogo");
@@ -32,7 +40,6 @@ function footerGenerator() {
   contactDataAndLogo.append(email, telNumber, logo);
   logo.append(copyright);
 }
-
 function logoGenerator() {
   const logo = document.createElement("div");
   const firstPartLogo = document.createElement("p");
@@ -40,27 +47,24 @@ function logoGenerator() {
 
   logo.className = "logo";
   firstPartLogo.className = "firstPartLogo";
-  firstPartLogo.textContent = "ITP";
   secPartLogo.className = "secPartLogo";
+  firstPartLogo.textContent = "ITP";
   secPartLogo.textContent = "ortfolio";
   logo.append(firstPartLogo, secPartLogo);
   return logo;
 }
-
 function navBarGenerator() {
-  const sectionNames = ["home", "projects", "about", "contact", "messages"];
   const list = document.createElement("ul");
 
   sectionNames.forEach((name) => {
     const li = document.createElement("li");
     const section = document.createElement("a");
+
     section.className = name;
     section.value = name;
     section.textContent = name.toUpperCase();
     section.href = "#";
-    section.addEventListener("click", () => {
-      navigationSupport(section);
-    });
+    section.addEventListener("click", () => navigationSupport(section));
     li.append(section);
     list.append(li);
   });
@@ -90,6 +94,7 @@ function hamburgerMenuSupport(hamburgerNav) {
   const activeSrc = "img/hamburgerMenuActive.png";
   const inactiveSrc = "img/hamburgerMenu.png";
   const isNavVisible = hamburgerNav.classList.contains("hidden");
+
   if (isNavVisible) {
     hamburgerNav.classList.remove("hidden");
     hamburgerIcon.src = activeSrc;
@@ -135,7 +140,6 @@ function navigationSupport(section) {
     subText.textContent = headerSectionInfo[4].subText;
   }
 }
-
 function articleGenerator(data, articleClassName) {
   const article = document.createElement("article");
   const imgDiv = document.createElement("div");
@@ -198,7 +202,6 @@ function skillGenerator(skill) {
   skillContainer.append(skillImg, skillSummary);
   return skillContainer;
 }
-
 function homeSectionGenerator() {
   const article = articleGenerator(homeSection, "homeArticle");
   const projects = homeSectionProjectsGenerator();
@@ -214,17 +217,16 @@ function aboutSectionGenerator() {
   const textSpan = document.createElement("span");
   const contactPageSelector = document.querySelector(".contact");
 
-  arrRightImg.src = "img/arrowRight.png";
   arrRightImg.className = "arrow";
-  textSpan.textContent = "Contact me";
   contactBtn.className = "bigBtn";
+  arrRightImg.src = "img/arrowRight.png";
+  textSpan.textContent = "Contact me";
   contactBtn.addEventListener("click", () => {
     navigationSupport(contactPageSelector);
   });
   contactBtn.append(arrRightImg, textSpan);
   mainSection.append(article, contactBtn);
 }
-
 function messagesSectionGenerator() {
   const allMessagesContainer = document.createElement("div");
 
@@ -244,7 +246,6 @@ function messagesSectionGenerator() {
     mainSection.append(allMessagesContainer);
   });
 }
-
 function contactSectionGenerator() {
   const contactInputNames = ["Name", "Email", "Message"];
   const contactSection = document.createElement("div");
@@ -255,13 +256,12 @@ function contactSectionGenerator() {
 
   nameAndEmailContainer.className = "nameAndEmailContainer";
   contactMeContainer.className = "contactMeContainer";
-  contactMeContainer.textContent = "Contact me";
   contactForm.className = "contactForm";
   contactSection.className = "contactSection";
   sendMessageBtn.className = "bigBtn";
-  sendMessageBtn.type = "submit";
+  contactMeContainer.textContent = "Contact me";
   sendMessageBtn.textContent = "Send message";
-  sendMessageBtn.addEventListener("click", tryToSendMsg);
+  sendMessageBtn.addEventListener("click", () => tryToSendMsg());
   contactInputNames.forEach((name) => {
     if (name === "Message") contactForm.append(inputCreator(name));
     else nameAndEmailContainer.append(inputCreator(name));
@@ -271,7 +271,6 @@ function contactSectionGenerator() {
   contactSection.append(contactForm, sendMessageBtn);
   mainSection.append(contactSection);
 }
-
 function inputCreator(name) {
   const inputContainer = document.createElement("div");
   const input = document.createElement("input");
@@ -459,7 +458,6 @@ function noProjectsAlert() {
 
   noProjectSpan.className = "noProjectSpan";
   noProjectSpan.textContent = "There are no projects to display";
-
   if (projectsSection.length === 0) {
     allProjectsContainer.remove();
     mainSection.append(noProjectSpan);
@@ -525,6 +523,7 @@ function tryToAddNewProject() {
       projectName: projectNameInput.value,
       technologyUsed: technologiesInput.value.split(","),
     };
+
     projectsSection.push(newProject);
     projectNameInput.value = "";
     technologiesInput.value = "";
@@ -536,13 +535,20 @@ function homeSectionProjectsGenerator(startingIndex = 0) {
   const projectsContainer = document.createElement("div");
 
   projectsContainer.className = "homeProjectsContainer";
-  for (let i = 0; i < 3; i++) {
-    if (startingIndex < 0)
-      startingIndex = projectsSection.length + startingIndex;
-    const projectToShow = projectGenerator(projectsSection[startingIndex]);
-    projectsContainer.append(projectToShow);
-    startingIndex++;
-    if (startingIndex === projectsSection.length) startingIndex = 0;
+  if (projectsSection.length < 3)
+    projectsSection.forEach((project) =>
+      projectsContainer.append(projectGenerator(project))
+    );
+  else {
+    for (let i = 0; i < 3; i++) {
+      if (startingIndex < 0)
+        startingIndex = projectsSection.length + startingIndex;
+      const projectToShow = projectGenerator(projectsSection[startingIndex]);
+
+      projectsContainer.append(projectToShow);
+      startingIndex++;
+      if (startingIndex === projectsSection.length) startingIndex = 0;
+    }
   }
   return projectsContainer;
 }
@@ -587,7 +593,3 @@ function carouselSupport(startingIndex) {
     homeSectionBtnsContainer
   );
 }
-headerGenerator();
-footerGenerator();
-const startingPageSelector = document.querySelector(".home");
-navigationSupport(startingPageSelector);
