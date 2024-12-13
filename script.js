@@ -375,7 +375,7 @@ function inputValidation(input) {
     if (projectNameLength <= 2)
       projectSpan.textContent = "The title must be at least 3 characters long.";
     else if (projectNameLength > 30)
-      projectSpan.textContent = "The title must not exceed 20 characters.";
+      projectSpan.textContent = "The title must not exceed 30 characters.";
     else {
       projectSpan.textContent = "";
       isError = false;

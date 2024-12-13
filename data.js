@@ -48,15 +48,15 @@ const projectsSection = [
     technologyUsed: ["html", "javascript", "css"],
   },
   {
-    projectName: "ASD",
+    projectName: "To-do list",
     technologyUsed: ["html", "javascript", "css"],
   },
   {
-    projectName: "basdasd",
-    technologyUsed: ["html", "javascript", "css"],
+    projectName: "Weather app",
+    technologyUsed: ["javascript", "css"],
   },
   {
-    projectName: "Pordfgfdtfolio",
+    projectName: "Bug tracker",
     technologyUsed: ["html", "javascript", "css"],
   },
 ];
